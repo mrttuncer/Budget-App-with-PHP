@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Transactions</title>
+    <title>Hareketler</title>
     <style>
         table {
             width: 100%;
@@ -31,10 +31,10 @@
     <table>
         <thead>
             <tr>
-                <th>Date</th>
-                <th>Check #</th>
-                <th>Description</th>
-                <th>Amount</th>
+                <th>Tarih</th>
+                <th>Kontrol</th>
+                <th>Açıklama</th>
+                <th>Tutar</th>
             </tr>
         </thead>
         <tbody>
@@ -62,19 +62,32 @@
         </tbody>
         <tfoot>
             <tr>
-                <th colspan="3">Total Income:</th>
+                <th colspan="3">Toplam Gelir:</th>
                 <td><?= formatDolarAmount($totals['totalIncome']) ?? 0 ?></td>
             </tr>
             <tr>
-                <th colspan="3">Total Expense:</th>
+                <th colspan="3">Toplam Gider:</th>
                 <td><?= formatDolarAmount($totals['totalExpense']) ?? 0 ?></td>
             </tr>
             <tr>
-                <th colspan="3">Net Total:</th>
+                <th colspan="3">Toplam Net:</th>
                 <td><?= formatDolarAmount($totals['netTotal']) ?? 0 ?></td>
             </tr>
         </tfoot>
     </table>
+    <?php if (($totals['netTotal']) < 0) : ?>
+        <span style="color:red; margin: auto; width: 100%;">
+            <p>Hareketleriniz sonucunda borcunuz bulunmaktadır.</p>
+        </span>
+    <?php elseif (($totals['netTotal']) > 0) : ?>
+        <span style="color:green; margin:auto;width: 100%;">
+            <p>Hareketleriniz sonucunda fazla geliriniz bulunmaktadır.</p>
+        </span>
+    <?php else : ?>
+        <span style="margin: auto;width: 100%;">
+            <p>Hareketleriniz sonucunda dengedesiniz, ne borcunuz ne fazla geliriniz bulunmamaktadır.</p>
+        </span>
+    <?php endif ?>
 </body>
 
 </html>
